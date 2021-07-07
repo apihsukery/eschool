@@ -15,8 +15,18 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    // public $timestamps = false;
     protected $fillable = [
-        'name', 'email', 'password',
+        'id'
+        ,'ic'
+        ,'name'
+        ,'email'
+        ,'password'
+        ,'role_id'
+        ,'remember_token'         
     ];
 
     /**
@@ -36,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
