@@ -23,3 +23,5 @@
 <link rel="stylesheet" href="{!! asset('AdminLTE/plugins/daterangepicker/daterangepicker.css') !!}">
 <!-- summernote -->
 <link rel="stylesheet" href="{!! asset('AdminLTE/plugins/summernote/summernote-bs4.min.css') !!}">
+<!-- jQuery -->
+<script src="{!! asset('AdminLTE/plugins/jquery/jquery.min.js') !!}"></script>
