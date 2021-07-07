@@ -65,7 +65,8 @@ class LoginController extends Controller
 
         if (Auth::attempt(['id'=>$request['id'],'password'=>$request['password']], $remember_me)) {
             $user = Auth::user();
-            Session::put('id', $user->id);
+            Session::put('id', $request['id']);
+            // Session::put('id2', Auth::id());
             return redirect()->route('home');
 
         }else{
