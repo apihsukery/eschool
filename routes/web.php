@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 // sample
 Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('auth');;
 
 // Route::get('/home', function () {
 //     return view('sample');
