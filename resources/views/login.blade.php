@@ -28,7 +28,7 @@
         <form id="sign_in" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="ID" id="id" name="id">
+                <input type="text" class="form-control" placeholder="ID" id="id" name="id" maxlength="7">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                <input type="password" class="form-control" placeholder="Password" id="password" name="password" maxlength="255" required>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -74,5 +74,19 @@
 <!-- /.login-box -->
 
 @include('layout.partials.footer-script')
+
+<script>
+
+    $(document).ready(function(){
+
+        // allow positive number only
+        $('#id').keypress(function() {
+            return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57;
+        });
+
+    });
+
+</script>
+
 </body>
 </html>

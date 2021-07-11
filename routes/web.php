@@ -13,18 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// sample
 Route::get('/', function () {
     return view('home');
 })->name('home')->middleware('auth');;
-
-// Route::get('/home', function () {
-//     return view('sample');
-// })->name('home');
 
 Route::get('/register', function () {
     return view('register');
@@ -43,6 +34,11 @@ Route::namespace('Auth')->group(function () {
     // Route::post('/register','LoginController@process_signup');
     Route::post('/logout','LoginController@logout')->name('logout');
 });
+
+
+
+// AJAX
+Route::post('/ajax', 'AjaxFunction@checkIC')->name('checkIC');
 
 // Auth::routes();
 

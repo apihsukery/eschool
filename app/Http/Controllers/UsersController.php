@@ -45,9 +45,9 @@ class UsersController extends Controller
 
         $id =   DB::table('users')
                 ->select(DB::raw("(CASE WHEN MAX(id) IS NULL
-                THEN CONCAT('SMKKK1',YEAR(CURRENT_TIME),'001')
-                ELSE CONCAT('SMKKK1',YEAR(CURRENT_TIME), LPAD((CONVERT(SUBSTRING_INDEX(MAX(id),CONCAT(YEAR(CURRENT_TIME)),-1),UNSIGNED INTEGER) + 1),3,'0')) END) AS id"))
-                ->whereRaw('SUBSTR(id,7,4) = YEAR(CURRENT_TIME)')
+                THEN CONCAT(YEAR(CURRENT_TIME),'001')
+                ELSE CONCAT(YEAR(CURRENT_TIME), LPAD((CONVERT(SUBSTRING_INDEX(MAX(id),CONCAT(YEAR(CURRENT_TIME)),-1),UNSIGNED INTEGER) + 1),3,'0')) END) AS id"))
+                ->whereRaw('SUBSTR(id,1,4) = YEAR(CURRENT_TIME)')
                 ->get();
                     
         // $prefix = "U-".date('Y'); 
