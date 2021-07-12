@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Users;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 
@@ -52,7 +52,7 @@ class UsersController extends Controller
                     
         // $prefix = "U-".date('Y'); 
         // $user_id = IdGenerator::generate(['table' => 'user', 'length' => 10, 'prefix' =>$prefix]);
-        $user = new Users([
+        $user = new User([
             'id' => $id[0]->id,
             'ic' => $request->get('ic'),
             'name' => $request->get('name'),

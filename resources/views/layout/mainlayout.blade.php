@@ -1,8 +1,3 @@
-<?php
-$users = App\Users::where('id', Session::get('id'))->first();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

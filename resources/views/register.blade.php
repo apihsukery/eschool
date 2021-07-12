@@ -26,7 +26,7 @@ $roles = App\Role::all();
                 {{ session()->get('success') }}
                 </div>
             </div>
-            <?php $new = App\Users::orderBy('created_at', 'desc')->first(); ?> <!-- get latest user -->
+            <?php $new = App\User::orderBy('created_at', 'desc')->first(); ?> <!-- get latest user -->
             <h5>Login Details</h5>
             <p>ID : <?=$new->id?><br>Password : IC Number</p>
             <br>

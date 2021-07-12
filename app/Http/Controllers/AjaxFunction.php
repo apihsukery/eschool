@@ -12,6 +12,7 @@ class AjaxFunction extends Controller
     // check IC already use or not
     public function checkIC(Request $request){
         $user = DB::table('users')->where('ic', $request->ic)->first();
+        // $user = App\User::where('ic', $request->ic)->first();
         if($user)
         {
             return response()->json(['exist'=>"IC number already registered",'flag'=>'1']);
