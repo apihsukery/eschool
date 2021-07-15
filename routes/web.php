@@ -42,7 +42,7 @@ Route::namespace('Auth')->group(function () {
 
 
 // AJAX
-Route::post('/ajax', 'AjaxFunction@checkIC')->name('checkIC');
+Route::post('/checkRecord', 'AjaxFunction@checkRecord')->name('checkRecord');
 
 // Auth::routes();
 

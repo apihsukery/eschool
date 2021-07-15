@@ -52,6 +52,7 @@ $roles = App\Role::all();
                         </div>
                     </div>
                 </div>
+                <span class="text-danger" style="display:none" id="ic_error">IC already used</span>
                 <div class="input-group mb-3">
                     <input type="text" id="ic" name="ic" class="form-control" placeholder="IC Number" maxlength="12">
                     <div class="input-group-append">
@@ -68,6 +69,7 @@ $roles = App\Role::all();
                         </div>
                     </div>
                 </div>
+                <span class="text-danger" style="display:none" id="email_error">Email already used</span>
                 <div class="input-group mb-3">
                     <input type="email" id="email" name="email" class="form-control" placeholder="Email" maxlength="255">
                     <div class="input-group-append">
@@ -78,7 +80,7 @@ $roles = App\Role::all();
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <button id="btnRegister" type="submit" class="btn btn-primary btn-block">Register</button>
+                        <button id="btnRegister" type="button" class="btn btn-primary btn-block">Register</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -103,8 +105,8 @@ $(document).ready(function(){
         return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57;
     });
 
-    // chceking ic
-    $("#ic").keyup(function (e) {
+    // checking ic
+    $("#ic,#email").keyup(function (e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -113,25 +115,55 @@ $(document).ready(function(){
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "{{ route('checkIC') }}",
+            url: "{{ route('checkRecord') }}",
             data: {
-                     ic: $('#ic').val()
+                    ic: $('#ic').val(),
+                    email: $('#email').val()
                   },
             dataType: 'json',
             success: function (data) {           
-                if(data.flag == "1")
+                if(data.ic == "1" || data.email == "1")
                 {
-                    alert(data.exist);
                     $("#btnRegister").prop("disabled",true);
+
+                    if(data.ic == "1") 
+                    {
+                        $("#ic_error").show();
+                    }
+                    else{
+                        $("#ic_error").hide();
+                    }
+
+                    if(data.email == "1")
+                    {
+                        $("#email_error").show();   
+                    } 
+                    else{
+                        $("#email_error").hide();  
+                    }
                 }
                 else{
                     $("#btnRegister").prop("disabled",false);
+                    $("#ic_error").hide();
+                    $("#email_error").hide();  
                 }
             },
             error: function (data) {
                 console.log(data);
             }
         });
+    });
+
+    $( "#btnRegister" ).click(function() {
+        if( $("#role_id").val() != 0 && $("#ic").val() != "" && $("#name").val() != "" && $("#email").val() != "" )
+        {
+            console.log("submit");
+        }
+        else
+        {
+            console.log("not submit");
+            alert("Please complete all field")
+        }
     });
 
 });
