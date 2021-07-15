@@ -158,6 +158,7 @@ $(document).ready(function(){
         if( $("#role_id").val() != 0 && $("#ic").val() != "" && $("#name").val() != "" && $("#email").val() != "" )
         {
             console.log("submit");
+            $( "#user_register" ).submit();
         }
         else
         {
