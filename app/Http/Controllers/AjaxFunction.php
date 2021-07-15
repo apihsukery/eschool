@@ -14,7 +14,8 @@ class AjaxFunction extends Controller
         $ic = DB::table('users')->where('ic', $request->ic)->first();
         $email = DB::table('users')->where('email', $request->email)->first();
 
-        $record=array();
+        $record=array("ic"=>"0","email"=>"0");
+
         if($ic)
         {
             $record["ic"] = "1";

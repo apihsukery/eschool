@@ -157,12 +157,12 @@ $(document).ready(function(){
     $( "#btnRegister" ).click(function() {
         if( $("#role_id").val() != 0 && $("#ic").val() != "" && $("#name").val() != "" && $("#email").val() != "" )
         {
-            console.log("submit");
+            // console.log("submit");
             $( "#user_register" ).submit();
         }
         else
         {
-            console.log("not submit");
+            // console.log("not submit");
             alert("Please complete all field")
         }
     });
