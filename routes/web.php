@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,11 @@ Route::get('/sample', function () {
     return view('sample');
 });
 
-Route::get('/register', function () {
+Route::get('/daftar', function () {
     return view('register');
 })->name('register');
+
+// Route::get('/register',[Register::class, 'render']);
 
 Route::get('/login', function () {
     return view('login');
@@ -47,3 +51,7 @@ Route::post('/checkRecord', 'AjaxFunction@checkRecord')->name('checkRecord');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

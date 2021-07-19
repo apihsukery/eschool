@@ -27,12 +27,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '0c4a6444c2c8fbf8bf625ae58c6974c6dcef7846',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -434,12 +434,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '0c4a6444c2c8fbf8bf625ae58c6974c6dcef7846',
     ),
     'laravel/tinker' => 
     array (
@@ -485,6 +485,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+    ),
+    'livewire/livewire' => 
+    array (
+      'pretty_version' => 'v2.5.5',
+      'version' => '2.5.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'de192292d68276d831e5fd9824c80c3b78a21ddf',
     ),
     'mockery/mockery' => 
     array (

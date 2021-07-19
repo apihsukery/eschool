@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+@livewireStyles
 @include('layout.partials.head')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -47,5 +48,6 @@
 <!-- ./wrapper -->
 
 @include('layout.partials.footer-script')
+@livewireScripts
 </body>
 </html>

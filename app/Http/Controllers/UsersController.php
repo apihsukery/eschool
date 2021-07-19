@@ -38,12 +38,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'role_id'   => 'required',
-        //     'ic'        => 'required|max:12',
-        //     'name'      => 'required|max:255',
-        //     'email'     => 'required|unique:users',
-        // ]);
+        $validated = $request->validate([
+            'role_id'   => 'required',
+            'ic' => 'required|unique:users|digits:12',
+            'name' => 'required|max:255',
+            'email'     => 'required|unique:users',
+        ]);
 
         $id =   DB::table('users')
                 ->select(DB::raw("(CASE WHEN MAX(id) IS NULL
