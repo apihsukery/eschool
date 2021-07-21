@@ -18,3 +18,5 @@ class User extends Model implements
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 }
+
+

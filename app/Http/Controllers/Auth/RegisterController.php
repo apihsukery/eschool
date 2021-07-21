@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'role_id' => ['required'],
+            'ic' => ['required', 'digits:12', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -64,10 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $id =   DB::table('users')
+                ->select(DB::raw("(CASE WHEN MAX(id) IS NULL
+                THEN CONCAT(YEAR(CURRENT_TIME),'001')
+                ELSE CONCAT(YEAR(CURRENT_TIME), LPAD((CONVERT(SUBSTRING_INDEX(MAX(id),CONCAT(YEAR(CURRENT_TIME)),-1),UNSIGNED INTEGER) + 1),3,'0')) END) AS id"))
+                ->whereRaw('SUBSTR(id,1,4) = YEAR(CURRENT_TIME)')
+                ->get();
+
         return User::create([
+            'id' => $id[0]->id,
+            'role_id' => $data['role_id'],
+            'ic' => $data['ic'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['ic']),
         ]);
     }
 }

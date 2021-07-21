@@ -33,21 +33,19 @@ $roles = App\Role::all();
                 <a href="{{ route('register') }}" class="text-center">Register More</a><br>
             @else
             <p class="login-box-msg">Register a new membership</p>
-                <form wire:submit.prevent="submitForm">
+                <form method="POST" action="{{ route('register') }}">
                 @csrf
                     @error('role_id')
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                     <div class="input-group mb-3">
-                        <select id="role_id" name="role_id" class="form-control" placeholder="Role" wire:model="role_id">
+                        <select id="role_id" name="role_id" class="form-control" placeholder="Role">
                             <option value="">Choose Role</option>
                             <!-- <option value="1">Student</option>
                             <option value="2">Teacher</option> -->
-                            <?php
-                            foreach ($roles as $role) {
-                                echo '<option value="'.$role->id.'">'.$role->name.'</option>';
-                            }
-                            ?>
+                            @foreach ($roles as $role)
+                                <option @if (old('role_id') == "$role->id") selected="selected" @endif value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
                         </select>
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -59,7 +57,7 @@ $roles = App\Role::all();
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                     <div class="input-group mb-3">
-                        <input type="text" id="ic" name="ic" class="form-control" placeholder="IC Number" maxlength="12" wire:model="ic">
+                        <input type="text" id="ic" name="ic" class="form-control" value="{{ old('ic') }}" placeholder="IC Number" maxlength="12">
                         <div class="input-group-append">
                             <div class="input-group-text">
                             <span class="fas fa-id-card"></span>
@@ -70,7 +68,7 @@ $roles = App\Role::all();
                         <p class="text-danger">{{$message}}</p>
                     @enderror
                     <div class="input-group mb-3">
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Full name" maxlength="255" wire:model="name">
+                        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" placeholder="Full name" maxlength="255">
                         <div class="input-group-append">
                             <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -82,7 +80,7 @@ $roles = App\Role::all();
                     @enderror
                     <span class="text-danger" style="display:none" id="email_error">Email already used</span>
                     <div class="input-group mb-3">
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" maxlength="255" wire:model="email">
+                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email" maxlength="255" wire:model="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -113,9 +111,9 @@ $roles = App\Role::all();
 $(document).ready(function(){
 
     // allow positive number only
-    $('#ic').keypress(function() {
-        return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57;
-    });
+    // $('#ic').keypress(function() {
+    //     return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57;
+    // });
 
     // // checking ic
     // $("#ic,#email").keyup(function (e) {
